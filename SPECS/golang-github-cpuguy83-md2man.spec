@@ -5,14 +5,14 @@
 GO111MODULE=off go build -buildmode pie -compiler gc -tags="rpm_crashtraceback ${BUILDTAGS:-}" -ldflags "${LDFLAGS:-} -linkmode=external -compressdwarf=false -B 0x$(head -c20 /dev/urandom|od -An -tx1|tr -d ' \\n') -extldflags '%__global_ldflags'" -a -v %{?**};
 %endif
 
-%global commit0 d97078115282836e16d0dca10b4b42ce60fc70e6
+%global commit0 f67b5f6400a3ea2156517041a329ae5f5935395c
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name: golang-github-cpuguy83-md2man
-Version: 2.0.2
-Release: 4%{?dist}
+Version: 2.0.3
+Release: 1%{?dist}
 Summary: Converts markdown into roff (man pages)
-License: MIT
+License: BSD-2-Clause AND MIT
 URL: https://github.com/cpuguy83/go-md2man
 Source0: https://github.com/cpuguy83/go-md2man/archive/%{commit0}/%{name}-%{version}-%{shortcommit0}.tar.gz
 # https://fedoraproject.org/wiki/PackagingDrafts/Go#Go_Language_Architectures
@@ -53,6 +53,18 @@ install -m 0755 -vp bin/* %{buildroot}%{_bindir}/
 %{_bindir}/*
 
 %changelog
+* Thu Oct 12 2023 Jindrich Novy <jnovy@redhat.com> - 2.0.3-1
+- update to https://github.com/cpuguy83/go-md2man/releases/tag/v2.0.3
+- Related: Jira:RHEL-2112
+
+* Wed Sep 27 2023 Jindrich Novy <jnovy@redhat.com> - 2.0.2-6
+- fix license tag
+- Related: Jira:RHEL-2112
+
+* Wed May 31 2023 Jindrich Novy <jnovy@redhat.com> - 2.0.2-5
+- update license to SPDX standard
+- Related: #2176063
+
 * Fri Dec 02 2022 Jindrich Novy <jnovy@redhat.com> - 2.0.2-4
 - fix RHEL9.2 build - thanks to Debarshi Ray
 - Related: #2124478
