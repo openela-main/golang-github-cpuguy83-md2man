@@ -16,7 +16,7 @@ Converts markdown into roff (man pages).}
 %global godocs          README.md go-md2man.1.md
 
 Name:           %{goname}
-Release:        8%{?dist}
+Release:        9%{?dist}
 Summary:        Converts markdown into roff (man pages)
 
 License:        MIT
@@ -24,6 +24,7 @@ URL:            %{gourl}
 Source0:        %{gosource}
 
 Provides:       go-md2man = %{version}-%{release}
+Provides:       golang(github.com/russross/blackfriday/v2) = 2
 
 %description %{common_description}
 
@@ -66,6 +67,10 @@ install -Dpm 0644 go-md2man.1 -t %{buildroot}%{_mandir}/man1/
 %gopkgfiles
 
 %changelog
+* Mon Apr 07 2025 Jindrich Novy <jnovy@redhat.com> - 2.0.3-9
+- add Provides: golang(github.com/russross/blackfriday/v2)
+- Resolves: RHEL-86199
+
 * Thu Nov 07 2024 Jindrich Novy <jnovy@redhat.com> - 2.0.3-8
 - re-add -devel and compat
 - Resolves: RHEL-65351
